@@ -1,5 +1,5 @@
 # ==========================================
-# EXPENSE TRACKER - Installment 3
+# EXPENSE TRACKER - Installment 4
 # ==========================================
 
 # Landing Page
@@ -25,12 +25,36 @@ subtotal = 0  # Initialize subtotal
 # First expense
 item1 = input("First expense? ")
 amount1 = float(input("Amount? "))
-subtotal = subtotal + amount1  # Add right after reading
+subtotal = subtotal + amount1
+
+# Size message for expense 1
+if amount1 > 200:
+    print("  Huge expense - are you sure?")
+elif amount1 > 100:
+    print("  Big expense.")
+elif amount1 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
 
 # Second expense
 item2 = input("Second expense? ")
 amount2 = float(input("Amount? "))
-subtotal = subtotal + amount2  # Add right after reading
+subtotal = subtotal + amount2
+
+# Size message for expense 2
+if amount2 > 200:
+    print("  Huge expense - are you sure?")
+elif amount2 > 100:
+    print("  Big expense.")
+elif amount2 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
+
+# Check for two big expenses (> 100)
+if amount1 > 100 and amount2 > 100:
+    print("  Two big expenses in a row - slow down!")
 
 # Financial calculations
 tax_percent = float(input("Tax rate %? "))
@@ -40,7 +64,6 @@ average = subtotal / 2
 tax = subtotal * (tax_percent / 100)
 total = subtotal + tax
 over_budget = total > budget
-left = budget - total  # Note: Expected format can result in negative values like $-4.0
 
 print("-" * 42)
 print("SUMMARY")
@@ -50,7 +73,17 @@ print(f"Subtotal:\t${subtotal}")
 print(f"Average:\t${average}")
 print(f"Tax ({tax_percent}%):\t${tax}")
 print(f"Grand total:\t${total}")
-print(f"Over budget?:\t{over_budget}")
-print(f"Left in budget:\t${left}")
+
+# Budget verdict logic (ensures no negative values are shown)
+if over_budget:
+    over_amount = total - budget
+    print(f"Over budget by ${over_amount}!")
+elif total > (0.9 * budget):
+    left_amount = budget - total
+    print(f"Careful: only ${left_amount} left.")
+else:
+    left_amount = budget - total
+    print(f"Within budget. ${left_amount} left.")
+
 print("-" * 42)
-print(f"Made by: {name} \t| \tInstallment 3")
+print(f"Made by: {name} \t| \tInstallment 4")
